@@ -1,16 +1,17 @@
 {
   "name": "PricePick",
   "short_name": "PricePick",
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f2f2f7",
   "theme_color": "#34c759",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icon-512.png",
+      "src": "/icon-512.png?v=2",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
