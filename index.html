@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PricePick</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="iphone">
+
+        <!-- Dynamic Island -->
+        <div class="dynamic-island"></div>
+
+        <!-- iPhone上部 -->
+        <header class="status-bar">
+            <span class="status-time">9:41</span>
+
+            <div class="status-icons">
+                <span>●●●</span>
+                <span>⌁</span>
+                <span>▰</span>
+            </div>
+        </header>
+
+
+        <!-- =========================
+             ホーム画面
+        ========================== -->
+        <section id="home-screen" class="app-screen">
+
+            <header class="top-header">
+
+                <div>
+                    <p class="eyebrow">PRICE COMPARISON</p>
+                    <h1>PricePick</h1>
+                </div>
+
+                <div class="app-logo">
+                    P
+                </div>
+
+            </header>
+
+
+            <section class="location-card">
+
+                <div class="location-symbol">
+                    ⌖
+                </div>
+
+                <div class="location-content">
+                    <span>現在地</span>
+
+                    <strong id="location-status">
+                        西宮北口周辺
+                    </strong>
+                </div>
+
+                <button
+                    type="button"
+                    class="location-button"
+                    onclick="getCurrentLocation()"
+                >
+                    取得
+                </button>
+
+            </section>
+
+
+            <section class="hero-section">
+
+                <p class="hero-caption">
+                    今日、何を安く買いますか？
+                </p>
+
+                <h2>
+                    商品ごとの最安値を<br>
+                    すぐに比較。
+                </h2>
+
+            </section>
+
+
+            <!-- 商品検索 -->
+            <section class="search-section">
+
+                <div class="search-field">
+
+                    <span class="search-icon">
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="product-input"
+                        placeholder="商品名を入力"
+                        autocomplete="off"
+                    >
+
+                    <button
+                        type="button"
+                        id="clear-button"
+                        class="clear-button hidden"
+                        onclick="clearSearch()"
+                        aria-label="入力内容を削除"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="suggestions"
+                    class="suggestions hidden"
+                ></div>
+
+
+                <button
+                    type="button"
+                    class="search-button"
+                    onclick="searchProduct()"
+                >
+                    最安値を検索
+                </button>
+
+            </section>
+
+
+            <!-- 人気の商品 -->
+            <section
+                id="popular-section"
+                class="content-section"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="section-label">POPULAR</p>
+                        <h3>人気の商品</h3>
+                    </div>
+
+                    <span class="section-note">
+                        サンプル
+                    </span>
+
+                </div>
+
+
+                <div class="category-grid">
+
+                    <button
+                        type="button"
+                        class="category-card"
+                        onclick="quickSearch('鶏もも肉')"
+                    >
+                        <span class="category-icon meat">
+                            🍗
+                        </span>
+
+                        <span>鶏もも肉</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="category-card"
+                        onclick="quickSearch('卵')"
+                    >
+                        <span class="category-icon egg">
+                            🥚
+                        </span>
+
+                        <span>卵</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="category-card"
+                        onclick="quickSearch('牛乳')"
+                    >
+                        <span class="category-icon milk">
+                            🥛
+                        </span>
+
+                        <span>牛乳</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="category-card"
+                        onclick="quickSearch('豆腐')"
+                    >
+                        <span class="category-icon tofu">
+                            □
+                        </span>
+
+                        <span>豆腐</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- 検索結果 -->
+            <section
+                id="ranking-section"
+                class="content-section hidden"
+            >
+
+                <div id="ranking-result"></div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =========================
+             店舗詳細画面
+        ========================== -->
+        <section
+            id="detail-screen"
+            class="app-screen hidden"
+        >
+
+            <header class="navigation-header">
+
+                <button
+                    type="button"
+                    class="back-button"
+                    onclick="showRanking()"
+                >
+                    ‹ 戻る
+                </button>
+
+                <strong>店舗詳細</strong>
+
+                <span class="header-placeholder"></span>
+
+            </header>
+
+            <div id="store-detail"></div>
+
+        </section>
+
+
+        <!-- 下部ナビゲーション -->
+        <nav id="bottom-navigation" class="bottom-navigation">
+
+            <button
+                type="button"
+                class="nav-item active"
+                onclick="showHome()"
+            >
+                <span class="nav-icon">⌂</span>
+                <span>ホーム</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="focusSearch()"
+            >
+                <span class="nav-icon">⌕</span>
+                <span>検索</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="showPrototypeMessage()"
+            >
+                <span class="nav-icon">♡</span>
+                <span>お気に入り</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="showPrototypeMessage()"
+            >
+                <span class="nav-icon">●</span>
+                <span>設定</span>
+            </button>
+
+        </nav>
+
+
+        <!-- iPhone下部バー -->
+        <div class="home-indicator"></div>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
